@@ -1,11 +1,17 @@
-import "./styles/home.css";
-
+import { BrowserRouter as Router, Routes, Route} from 'react-router-dom';
+import Navbar from '@/components/Navbar';
+import Category from '@/components/Category';
+import ProductDetail from '@/components/ProductDetail';
 function App() {
 
   return (
-     <div className='container'>
-      asdfasdf
-     </div>
+         <Router>
+         <Navbar></Navbar>
+         <Category></Category>
+         <ProductDetail></ProductDetail>
+      <Routes>
+      </Routes>
+    </Router>
   )
 }
 
