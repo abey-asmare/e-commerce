@@ -6,11 +6,11 @@ function App() {
 
   return (
          <Router>
-         <Navbar></Navbar>
+          <Navbar></Navbar>
          <Category></Category>
-         <ProductDetail></ProductDetail>
+         {/* <ProductDetail></ProductDetail> */}
       <Routes>
-      </Routes>
+      </Routes> 
     </Router>
   )
 }
