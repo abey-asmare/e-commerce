@@ -1,18 +1,30 @@
-import { BrowserRouter as Router, Routes, Route} from 'react-router-dom';
-import Navbar from '@/components/Navbar';
-import Category from '@/components/Category';
-import ProductDetail from '@/components/ProductDetail';
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import Navbar from "@/components/Navbar";
+
+import ProductDetail from "@/components/ProductDetail";
+import ProtectedRoute from "./ProtectedRoute";
+import Login from "./login";
+import ProductForm from "./ProductForm";
 function App() {
-
   return (
-         <Router>
-          <Navbar></Navbar>
-         <Category></Category>
-         {/* <ProductDetail></ProductDetail> */}
+    <BrowserRouter>
+      <Navbar></Navbar>
       <Routes>
-      </Routes> 
-    </Router>
-  )
+        <Route path="/login" element={<Login></Login>}></Route>
+        <Route
+          path="/products/new"
+          element={<ProductForm></ProductForm>}
+        ></Route>
+        <Route
+          path="/products/:id"
+          element={
+            <ProtectedRoute>
+              <ProductDetail></ProductDetail>
+            </ProtectedRoute>
+          }
+        ></Route>
+      </Routes>
+    </BrowserRouter>
+  );
 }
-
-export default App
+export default App;

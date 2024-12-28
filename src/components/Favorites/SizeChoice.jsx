@@ -1,22 +1,28 @@
 import PropTypes from "prop-types";
-import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
-
+import { useProductStore } from "@/store/store";
+import { Toggle } from "@radix-ui/react-toggle";
 
 function SizeChoice({ size }) {
-    return (
-      <ToggleGroup type="multiple">
-        <ToggleGroupItem
-          value={size}
-          className="border border-gray-400 py-3 h-10 data-[state=off]:bg-transparent data-[state=off]:text-gray-600 hover:text-black hover:border-black px-6 rounded-none text-base font-semibold data-[state=on]:bg-[#1A1A1D] data-[state=on]:text-white"
-        >
-          {size}
-        </ToggleGroupItem>
-      </ToggleGroup>
-    );
-  }
-  
-  SizeChoice.propTypes = {
-    size: PropTypes.string,
-  };
+  const choosenSize = useProductStore(state => state.product.choosenSize)
+  const setChoosenSize = useProductStore(
+    (state) => state.product.setChoosenSize
+  );
+  return (
+    <Toggle
+      className={`flex items-center border border-gray-400 py-3 h-10 hover:text-black hover:border-black px-6 rounded-none text-base font-semibold ${choosenSize.value === size.value ? "bg-[#1A1A1D] text-white":"bg-transparent text-gray-600 s" }`}
+      onClick={() => setChoosenSize(size)}
+      value={size.value}
+    >
+      {size.label}
+    </Toggle>
+  );
+}
 
-  export default SizeChoice
+SizeChoice.propTypes = {
+  size: PropTypes.shape({
+    label: PropTypes.string.isRequired,
+    value: PropTypes.string.isRequired,
+  }),
+};
+
+export default SizeChoice;

@@ -1,6 +1,8 @@
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import PropTypes from "prop-types";
 import Rating from "./Rating";
+import { Badge } from "@/components/ui/badge"
+
 
 function UserProfile({
   avatar_classname = "",
@@ -9,7 +11,8 @@ function UserProfile({
   activeStatus = "Just Now",
   type = "",
   rating = 1,
-  className
+  className,
+  isOwner
 }) {
   const getInitials = (name) =>
     name
@@ -26,16 +29,20 @@ function UserProfile({
       {type === "profile" ? null : (
         <div className="flex flex-col">
           <p className="username text-black font-semibold flex items-center gap-2.5">
-            {username}{" "}
+            {username} 
+            {isOwner && (
+              <Badge variant="outlined" className={` cursor-pointer border-[#6C580C] text-[#6C580C] hover:border-[#E9DDAC]  rounded-full px-4 hover:bg-[#E9DDAC] hover:text-[#6C580C]`}>Edit</Badge>
+            )
+            }
             {type === "compact" && (
               <span className="text-gray-400 font-medium text-sm">{activeStatus}</span>
             )}
           </p>
           {type === "compact" ? (
             <Rating
-              star_className="size-4"
+              star_className="size-4 scale-75"
               rating={rating}
-              className="gap-0.5 -translate-y-2/3"
+              className="-translate-y-2/3 -space-x-1.5"
             />
           ) : (
             <p className="active-status font-medium text-sm text-gray-400">

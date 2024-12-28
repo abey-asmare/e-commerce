@@ -39,7 +39,7 @@ function Rating({
           </span>
         ))}
       </span>
-      <span className={`${size == "sm" ? "text-gray-400 text-base": "text-black text-2xl"} font-medium ${text_className}`}>{text}</span>
+      <span className={`${size == "sm" ? "text-gray-400 text-base": "text-black text-2xl ml-3"} font-medium ${text_className}`}>{text}</span>
     </span>
   );
 }
@@ -47,7 +47,7 @@ function Rating({
 Rating.propTypes = {
   size: PropTypes.string,
   rating: PropTypes.number,
-  text: PropTypes.number,
+  text: PropTypes.string,
   star_className: PropTypes.string,
   text_className: PropTypes.string,
   className: PropTypes.string,

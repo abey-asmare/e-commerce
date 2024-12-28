@@ -81,13 +81,13 @@ const MessageSection = ({ clientName, productOwnerName, initialMessages, classNa
           </button>
         </div>
         <div className="mt-2 text-sm text-gray-500 flex items-center justify-between">
-          <span>Press Enter to send as {clientName}</span>
+          {/* <span>Press Enter to send as {clientName}</span>
           <button
             onClick={() => handleSendMessage('productOwner')}
             className="px-4 py-1 rounded-lg bg-[#E6D5B8] text-gray-800 hover:bg-[#d8c7aa] transition-colors"
           >
             Send as {productOwnerName}
-          </button>
+          </button> */}
         </div>
       </div>
     </div>

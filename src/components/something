@@ -1,23 +1,6 @@
- <div className="review-container space-y-3">
-              {/* comment mock */}
-              <Comment
-                username="John Doe"
-                likes={10}
-                dislikes={2}
-                commentText="This is a great post!"
-                subcomments={[
-                  {
-                    username: "Jane Smith",
-                    likes: 3,
-                    dislikes: 0,
-                    commentText: "I agree!",
-                  },
-                  {
-                    username: "Alex Brown",
-                    likes: 1,
-                    dislikes: 1,
-                    commentText: "Interesting perspective.",
-                  },
-                ]}
-              />
-            </div>
+{/* <Comment username={subcomments.username} key={index} id={subcomments.id} className="subcomment"></Comment> */}
+
+
+
+
+{/* <Comment id={comment.id} key={comment.id} username={comment.name} avatar={comment.avatar} likes={comment.likes} dislikes={comment.dislikes}></Comment> */}

@@ -1,6 +1,12 @@
+import { useCategoryStore } from "@/store/store";
+import FilterSheet from "./FilterSheet";
+
+
 function Category() {
+  const { currentCategory, setCurrentCategory } = useCategoryStore();
+
   return (
-    <div className="relative py-4 px-6 md:px-10">
+    <div className="relative py-4 ">
       <div className="flex justify-between items-center">
         <div
           className="flex-grow overflow-hidden"
@@ -17,24 +23,59 @@ function Category() {
             }}
           >
             <ul className="flex gap-4 md:gap-8 font-normal md:font-medium text-sm sm:text-md whitespace-nowrap pr-24">
-              <li className="cursor-pointer hover:underline hover:transition">
+              <li
+                className={`cursor-pointer hover:underline hover:transition ${
+                  currentCategory == "all"
+                    ? "text-black underline"
+                    : "opacity-70"
+                }`}
+                onClick={() => setCurrentCategory("all")}
+              >
                 All Men&apos;s Clothing
               </li>
-              <li className="cursor-pointer hover:underline hover:transition">
+              <li
+                className={`cursor-pointer hover:underline hover:transition ${
+                  currentCategory == "women"
+                    ? "text-black underline"
+                    : "opacity-70"
+                }`}
+                onClick={() => setCurrentCategory("women")}
+              >
                 Women
               </li>
-              <li className="cursor-pointer hover:underline hover:transition">
+              <li
+                className={`cursor-pointer hover:underline hover:transition ${
+                  currentCategory == "kids"
+                    ? "text-black underline"
+                    : "opacity-70"
+                }`}
+                onClick={() => setCurrentCategory("kids")}
+              >
                 Kids
               </li>
-              <li className="cursor-pointer hover:underline hover:transition">
+              <li
+                className={`cursor-pointer hover:underline hover:transition ${
+                  currentCategory == "sports"
+                    ? "text-black underline"
+                    : "opacity-70"
+                }`}
+                onClick={() => setCurrentCategory("sports")}
+              >
                 Sports
               </li>
-              <li className="text-c_red cursor-pointer hover:underline hover:transition">
+              <li
+                className={`text-c_red cursor-pointer hover:underline hover:transition ${
+                  currentCategory == "sale" ? "underline" : "opacity-70"
+                }`}
+                onClick={() => setCurrentCategory("sale")}
+              >
                 Sale
               </li>
             </ul>
           </div>
         </div>
+        <FilterSheet>
+
         <div className="flex-shrink-0 ml-4 border-2 border-black flex gap-2 py-1.5 px-2 cursor-pointer whitespace-nowrap bg-white">
           <p className="hidden sm:flex">Filter & Sort</p>
           <span>
@@ -54,8 +95,10 @@ function Category() {
             </svg>
           </span>
         </div>
+        </FilterSheet>
+
       </div>
-      <style jsx>{`
+      <style>{`
         /* Hide scrollbar for Chrome, Safari and Opera */
         div::-webkit-scrollbar {
           display: none;
