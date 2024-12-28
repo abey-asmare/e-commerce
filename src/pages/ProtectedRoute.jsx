@@ -2,17 +2,21 @@
 import { useEffect, useState } from "react"
 import {Navigate} from 'react-router-dom'
 import { auth } from "@/lib/apiRequests"
+import { useUserAuth } from "@/store/store";
 
 
 
 function ProtectedRoute({children}) {
 
   const [isAuthenticated, setIsAuthenticated] = useState(null)
+    const {isUserLoggedIn, setIsUserLoggedIn} = useUserAuth();
+  
 
   useEffect(()=>{
     const login = async ()=> {
       const result  = await auth();
       setIsAuthenticated(result)
+      setIsUserLoggedIn(result)
     }
     login();
     //**

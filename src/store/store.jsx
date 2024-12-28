@@ -160,3 +160,9 @@ export const useCommentStore = create((set, get) => ({
   openCommentId : -1,
   setOpenCommentId : (openCommentId) => set(() => ({openCommentId}))
 }))
+
+
+export const useUserAuth = create(set => ({
+  isUserLoggedIn: false, 
+  setIsUserLoggedIn: (isUserLoggedIn) => set(()=>( {isUserLoggedIn}))
+}))

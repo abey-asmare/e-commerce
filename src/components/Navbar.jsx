@@ -10,15 +10,20 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import UserProfile from "./Favorites/UserProfile";
+import { useUserAuth } from "@/store/store";
 
 function Navbar() {
-  // const isDesktop = useMediaQuery("(min-width: 768px)");
+
+  const {isUserLoggedIn, setIsUserLoggedIn} = useUserAuth();
+  
   return (
-    <div className="nav-bar flex flex-wrap justify-between mt-2 border-b pb-2 px-2 md:px-14 sticky top-0 bg-white z-10">
+    <div className="nav-bar flex flex-wrap justify-between pt-2 border-b pb-2 px-2 md:px-14 sticky top-0 bg-white z-10">
       <div className="left flex gap-3 sm:text-lg md:text-xl lg:text-2xl font-bold items-center">
         <img src="/icons/logo.svg" alt="logo" className="h-6 w-6" />
         <p className="hidden md:flex">Logo</p>
       </div>
+     {
+      isUserLoggedIn &&
       <div className="middle flex gap-0 bg-transparent relative">
         <span className="absolute top-1/2 -translate-y-1/2 left-8 hidden md:flex">
           <svg
@@ -42,7 +47,10 @@ function Navbar() {
           placeholder="Search for anything"
         ></Input>
       </div>
-      <div className="right flex gap-6 items-center">
+     }
+
+{isUserLoggedIn &&
+  <div className="right flex gap-6 items-center">
         <div className="icons gap-3 hidden md:flex">
           <span className="heart">
             <svg
@@ -176,7 +184,7 @@ function Navbar() {
             </DropdownMenuContent>
           </DropdownMenu>
         </div>
-      </div>
+      </div>}
     </div>
   );
 }
