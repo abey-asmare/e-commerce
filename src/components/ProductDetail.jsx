@@ -97,7 +97,7 @@ function ProductDetail() {
                   </h2>
                   <Rating text="42 reviews"></Rating>
                 </div>
-                <div className="price text-xl md:text-3xl font-semibold">
+                <div className=" text-xl md:text-3xl font-semibold">
                   {product.price}
                 </div>
                 <div className="color-section">

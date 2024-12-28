@@ -6,11 +6,24 @@ import ProtectedRoute from "./ProtectedRoute";
 import Login from "./login";
 import ProductForm from "./ProductForm";
 import Register from "./Register";
+import Home from "@/components/Home/Home";
+import LandingPage from "./LandingPage";
 function App() {
   return (
     <BrowserRouter>
       <Navbar></Navbar>
       <Routes>
+        <Route path="/" element={<LandingPage></LandingPage>}>
+          
+        </Route>
+        <Route
+          path="/products"
+          element={
+            <ProtectedRoute>
+              <Home></Home>
+            </ProtectedRoute>
+          }
+        ></Route>
         <Route path="/login" element={<Login></Login>}></Route>
         <Route path="/register" element={<Register></Register>}></Route>
         <Route

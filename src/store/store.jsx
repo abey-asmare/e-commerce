@@ -166,3 +166,85 @@ export const useUserAuth = create(set => ({
   isUserLoggedIn: false, 
   setIsUserLoggedIn: (isUserLoggedIn) => set(()=>( {isUserLoggedIn}))
 }))
+
+
+
+
+export const useStore = create((set, get) => ({
+  products: [],
+  filters: {
+    sortBy: '',
+    discount: [],
+    gender: [],
+    size: [],
+    priceRange: [30, 3500],
+  },
+  
+  setProducts: (products) => set({ products }),
+  
+  setFilter: (filterType, value) => {
+    set((state) => ({
+      filters: {
+        ...state.filters,
+        [filterType]: value,
+      },
+    }))
+  },
+
+  getFilteredProducts: () => {
+    const { products, filters } = get()
+    
+    return products
+      .filter((product) => {
+        // Gender filter
+        if (filters.gender.length > 0 && !filters.gender.includes(product.category)) {
+          return false
+        }
+
+        // Price range filter
+        if (
+          product.price < filters.priceRange[0] ||
+          product.price > filters.priceRange[1]
+        ) {
+          return false
+        }
+
+        // Discount filter
+        if (filters.discount.length > 0) {
+          const discountPercentage = ((product.price - (product.discountedPrice || product.price)) / product.price) * 100
+          
+          const matchesDiscount = filters.discount.some(range => {
+            const [min, max] = range.split('-').map(num => parseInt(num))
+            return discountPercentage >= min && (!max || discountPercentage <= max)
+          })
+          
+          if (!matchesDiscount) return false
+        }
+
+        // Size filter (assuming product has sizes array)
+        if (filters.size.length > 0) {
+          const hasMatchingSize = filters.size.some(size => 
+            product.sizes?.includes(size)
+          )
+          if (!hasMatchingSize) return false
+        }
+
+        return true
+      })
+      .sort((a, b) => {
+        switch (filters.sortBy) {
+          case 'Price(LOW TO HIGH)':
+            return a.price - b.price
+          case 'Price(HIGH TO LOW)':
+            return b.price - a.price
+          case 'Newest':
+            return new Date(b.id) - new Date(a.id)
+          default:
+            return 0
+        }
+      })
+  },
+}))
+
+
+
