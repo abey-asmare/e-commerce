@@ -8,12 +8,14 @@ import ProductForm from "./ProductForm";
 import Register from "./Register";
 import Home from "@/components/Home/Home";
 import LandingPage from "./LandingPage";
+import ProductListings from "./ProductListings";
 function App() {
   return (
     <BrowserRouter>
       <Navbar></Navbar>
       <Routes>
-        <Route path="/" element={<LandingPage></LandingPage>}>
+        <Route path="/" element={<LandingPage></LandingPage>}></Route>
+        <Route path="/productlistings" element={<ProductListings></ProductListings>}>
           
         </Route>
         <Route

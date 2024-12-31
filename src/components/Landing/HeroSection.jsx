@@ -5,7 +5,7 @@ export function HeroSection() {
     <div className="grid grid-cols-1 md:grid-cols-2 gap-8 px-6 py-12">
       <div className="flex flex-col justify-center space-y-6">
         <h1 className="text-4xl md:text-5xl font-bold tracking-tight">
-          Bold Designs,
+          <span className="opacity-75">Bold Designs,</span>
           <br />
           Bold You
         </h1>
@@ -19,7 +19,7 @@ export function HeroSection() {
         </div>
       </div>
       <div className="relative aspect-[4/3] md:aspect-[16/10]">
-        <img src="/placeholder.svg"
+        <img src="/images/hero-image.png"
           alt="Two people wearing white t-shirts"
 
           className="object-cover rounded-2xl" />

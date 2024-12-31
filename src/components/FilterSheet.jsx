@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   Sheet,
   SheetContent,
@@ -10,6 +10,8 @@ import {
 import { Button } from "./ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Slider } from "@/components/ui/slider";
+import { Label } from "@/components/ui/label";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 
 import {
   Accordion,
@@ -18,46 +20,18 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import PriceRangeSlider from "./Favorites/PriceRangeSlider";
+import { useFilterSheetStore, useProductListingStore } from "@/store/store";
 
-const ITEMS = [
-  {
-    title: "Sort by",
-    values: [
-      "Price(LOW TO HIGH)",
-      "Price(HIGH TO LOW)",
-      "Newest",
-      "Top Sellers",
-    ],
-    type: "radio",
-  },
-  {
-    title: "Discount",
-    values: ["Up to 20%", "20 - 30%", "30-40%", "40% and More"],
-    type: "checkbox",
-  },
-  {
-    title: "Gender",
-    values: ["Male", "Female", "Unisex", "Kids"],
-    type: "checkbox",
-  },
-  {
-    title: "Size",
-    values: ["SM", "Md", "Lg", "XL", "2XL"],
-    type: "checkbox",
-  },
-  {
-    title: "Price",
-    values: [30, 3500], // min and max values for the slider
-    type: "draggable",
-  },
-];
 
 function FilterSheet({ children }) {
-  const [priceRange, setPriceRange] = useState(ITEMS[4].values);
 
-  const handlePriceChange = (newValues) => {
-    setPriceRange(newValues);
+  const { filters, setFilters, resetFilters } = useFilterSheetStore();
+  const { applyFiltersAndSort } = useProductListingStore();
+
+  const handleApplyFilters = () => {
+    applyFiltersAndSort();
   };
+
 
   return (
     <Sheet>
@@ -73,7 +47,7 @@ function FilterSheet({ children }) {
             </div>
           </SheetTitle>
           <SheetDescription className="text-lg font-semibold text-black">
-            {ITEMS.map((item, index) => (
+            {filters.map((item, index) => (
               <Accordion key={index} type="multiple" collapsible>
                 <AccordionItem value={`item-${index}`}>
                   <AccordionTrigger className="text-lg font-semibold">
@@ -86,8 +60,22 @@ function FilterSheet({ children }) {
                           min={item.values[0]}
                           max={item.values[1]}
                           step={10}
+                          value={item.selected}
                         />
                       </div>
+                    ) : item.type === "radio" ? (
+                      item.values.map((value, valueIndex) => (
+
+                      <RadioGroup key={valueIndex}  value={item.selected} onValueChange={(value) =>
+                          setFilters(item.title, value)
+                        } defaultValue="" >
+                        <div className="flex items-center space-x-2 space-y-2">
+                          <RadioGroupItem value={value} id={value} />
+                          <Label htmlFor={value}>{value}</Label>
+                        </div>
+                      </RadioGroup>
+                    ))
+
                     ) : (
                       item.values.map((value, valueIndex) => (
                         <div
@@ -97,6 +85,10 @@ function FilterSheet({ children }) {
                           <Checkbox
                             id={`${item.title}-${valueIndex}`}
                             className="w-5 h-5"
+                            checked={item.selected.includes(value)}
+                            onCheckedChange={() =>
+                              setFilters(item.title, value)
+                            }
                           />
                           <label
                             htmlFor={`${item.title}-${valueIndex}`}

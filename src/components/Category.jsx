@@ -1,12 +1,18 @@
-import { useCategoryStore } from "@/store/store";
+import { useCategoryStore, useProductListingStore } from "@/store/store";
 import FilterSheet from "./FilterSheet";
+import { Skeleton } from "./ui/skeleton";
+import { Label } from "@/components/ui/label"
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 
 
 function Category() {
   const { currentCategory, setCurrentCategory } = useCategoryStore();
+  const loading = useProductListingStore(state => state.loading)
+
+
 
   return (
-    <div className="relative py-4 ">
+    <div className={`relative py-4 ${loading ? "invisible": "visible"}`}>
       <div className="flex justify-between items-center">
         <div
           className="flex-grow overflow-hidden"
@@ -22,7 +28,7 @@ function Category() {
               msOverflowStyle: "none",
             }}
           >
-            <ul className="flex gap-4 md:gap-8 font-normal md:font-medium text-sm sm:text-md whitespace-nowrap pr-24">
+            <ul className="flex gap-4 md:gap-8 font-normal md:font-medium text-sm sm:text-md whitespace-nowrap pr-24 flex items-center">
               <li
                 className={`cursor-pointer hover:underline hover:transition ${
                   currentCategory == "all"

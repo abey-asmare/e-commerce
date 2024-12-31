@@ -5,10 +5,12 @@ export const refreshToken = async () => {
 // to be implemented later
 };
 
+
+
 export const auth = async () => {
   return new Promise((resolve) => {
     setTimeout(() => {
       resolve(true)
-    }, 1000);
+    }, 2000);
   })
 };

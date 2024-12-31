@@ -5,7 +5,6 @@ import sideObj from "@/lib/side";
 import CardSide from "./CardSide";
 import Category from "../Category";
 import Footer from "../Footer";
-import { Newsletter } from "../Landing/NewsLetter";
 
 function Home() {
   return (
