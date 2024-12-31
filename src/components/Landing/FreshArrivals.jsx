@@ -2,7 +2,7 @@ import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area"
 import { ChevronLeft, ChevronRight } from 'lucide-react'
 import { Button } from "@/components/ui/button"
 import { useState } from "react"
-import { Navigate } from "react-router-dom"
+import { Navigate, useNavigate } from "react-router-dom"
 
 const arrivals = [
   {
@@ -28,6 +28,8 @@ const arrivals = [
 ]
 
 export function FreshArrivals() {
+  const navigate = useNavigate();
+
   return (
     <section className="py-12 px-6">
       <h2 className="text-2xl font-semibold text-center mb-8">
@@ -43,9 +45,8 @@ export function FreshArrivals() {
             {arrivals.map((item) => (
               <div key={item.id}className="cursor-pointer flex-shrink-0 px-2">
                 <div className="relative aspect-[3/4] w-80">
-                  
                   <img  src={item.image}
-                   onClick={()=> {<Navigate to={'/products/1'}></Navigate>}} 
+                   onClick={() => navigate('/products')}
                     alt={`${item.category} fashion`}
                     className="object-cover rounded-lg w-full h-full" />
                   <div className="absolute bottom-4 left-4 bg-white px-4 py-1 rounded-full">

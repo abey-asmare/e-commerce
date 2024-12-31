@@ -13,16 +13,12 @@ import { SM_CARD_DELAYS } from "@/lib/constants";
 function ProductListings() {
   const { products, filterProducts,  getAllProducts, loading, error, reset } =
     useProductListingStore();
-  const { filters, setFilters,extractSelectedFilters, resetFilters } = useFilterSheetStore()
-
+  const { filters, setFilters, applyFilters, resetFilters } = useFilterSheetStore()
   useEffect(() => {
     getAllProducts()
-  }, [getAllProducts])
+  }, [filters])
 
-  useEffect(() => {
-    const selectedFilters = extractSelectedFilters()
-    filterProducts(selectedFilters)
-  }, [filters, extractSelectedFilters, filterProducts])
+
 
   
 
